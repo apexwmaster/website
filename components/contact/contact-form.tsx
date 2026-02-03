@@ -399,7 +399,7 @@ function ContactForm() {
                 Phone
               </div>
               <p className="mt-1 text-sm text-zinc-700">
-                (260) 755-5993
+                Fort Wayne: (260) 755-5993
               </p>
               <p className="mt-0.5 text-sm text-zinc-700">
                 Indianapolis: (317) 992-1644
