@@ -2,7 +2,10 @@ import LegacySection from '@/components/about/legacy-section';
 import { LocationsSection } from '@/components/about/locations';
 import { TeamSection, TeamSectionAlt } from '@/components/about/team';
 import PageHero from '@/components/shared/page-hero';
-import { getTeamMembers, getOfficeLocations } from '@/sanity/lib/data';
+import {
+  getTeamMembers,
+  getOfficeLocations,
+} from '@/sanity/lib/data';
 
 async function AboutPage() {
   const [teamMembers, officeLocations] = await Promise.all([
@@ -18,7 +21,7 @@ async function AboutPage() {
       />
       <LegacySection />
       <TeamSection members={teamMembers} />
-      <TeamSectionAlt members={teamMembers} />
+      {/* <TeamSectionAlt members={teamMembers} /> */}
       <LocationsSection locations={officeLocations} />
     </main>
   );
