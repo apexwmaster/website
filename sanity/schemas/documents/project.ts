@@ -41,7 +41,13 @@ export default defineType({
       type: 'image',
       options: { hotspot: true },
       description: 'The primary image shown on the project card. Use the hotspot to set the focal point for cropping.',
-      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      description: 'Featured projects are displayed prominently with their images.',
+      initialValue: false,
     }),
     defineField({
       name: 'servicesCompleted',

@@ -55,6 +55,7 @@ export async function getProjects() {
         title: p.title,
         description: p.description,
         image: getImageUrl(p.image, 800),
+        featured: p.featured,
         servicesCompleted: p.servicesCompleted,
         client: p.client,
         year: p.year,

@@ -9,6 +9,7 @@ export const projectsQuery = groq`
     location,
     description,
     image,
+    featured,
     servicesCompleted,
     client,
     year

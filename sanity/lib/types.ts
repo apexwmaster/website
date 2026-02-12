@@ -6,7 +6,8 @@ export interface SanityProject {
   slug: string
   location: string
   description: string
-  image: Image
+  image: Image | null
+  featured?: boolean
   servicesCompleted: string[]
   client?: string
   year?: string

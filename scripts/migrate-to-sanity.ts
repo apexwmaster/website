@@ -40,6 +40,15 @@ const client = createClient({
   useCdn: false,
 });
 
+// Helper to delete all documents of a given type
+async function deleteAllOfType(type: string) {
+  const count = await client.fetch<number>(`count(*[_type == "${type}"])`);
+  if (count > 0) {
+    console.log(`  Deleting ${count} existing ${type} documents...`);
+    await client.delete({ query: `*[_type == "${type}"]` });
+  }
+}
+
 // Helper to upload an image and return the asset reference
 async function uploadImage(
   imagePath: string
@@ -80,6 +89,7 @@ async function uploadImage(
 // Migration functions
 async function migrateTeamMembers() {
   console.log('\n📋 Migrating Team Members...');
+  await deleteAllOfType('teamMember');
 
   for (let i = 0; i < teamMembers.length; i++) {
     const member = teamMembers[i];
@@ -102,6 +112,7 @@ async function migrateTeamMembers() {
 
 async function migrateClientCategories() {
   console.log('\n📋 Migrating Client Categories...');
+  await deleteAllOfType('clientCategory');
 
   for (let i = 0; i < clientCategories.length; i++) {
     const category = clientCategories[i];
@@ -126,6 +137,7 @@ async function migrateClientCategories() {
 
 async function migrateOfficeLocations() {
   console.log('\n📋 Migrating Office Locations...');
+  await deleteAllOfType('officeLocation');
 
   for (let i = 0; i < officeLocations.length; i++) {
     const location = officeLocations[i];
@@ -149,6 +161,8 @@ async function migrateOfficeLocations() {
 
 async function migrateProjectCategories() {
   console.log('\n📋 Migrating Experience Project Categories...');
+  await deleteAllOfType('experienceProject');
+  await deleteAllOfType('projectCategory');
 
   const categoryRefs: Record<string, string> = {};
 
@@ -208,6 +222,7 @@ async function migrateProjectCategories() {
 
 async function migrateProcessSteps() {
   console.log('\n📋 Migrating Process Steps...');
+  await deleteAllOfType('processStep');
 
   for (let i = 0; i < processSteps.length; i++) {
     const step = processSteps[i];
@@ -230,12 +245,15 @@ async function migrateProcessSteps() {
 
 async function migrateProjects() {
   console.log('\n📋 Migrating Showcase Projects...');
+  await deleteAllOfType('project');
 
   for (let i = 0; i < projects.length; i++) {
     const project = projects[i];
     console.log(`  ${i + 1}/${projects.length}: ${project.title}`);
 
-    const mainImage = await uploadImage(project.image);
+    const mainImage = project.image
+      ? await uploadImage(project.image)
+      : null;
 
     // Upload gallery images
     const gallery = [];
@@ -259,7 +277,8 @@ async function migrateProjects() {
       slug: { _type: 'slug', current: project.slug },
       location: project.location,
       description: project.description,
-      image: mainImage,
+      ...(mainImage ? { image: mainImage } : {}),
+      featured: project.featured ?? false,
       servicesCompleted: project.servicesCompleted,
       client: project.client,
       year: project.year,

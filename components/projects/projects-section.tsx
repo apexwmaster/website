@@ -7,11 +7,13 @@ interface ProjectsSectionProps {
 }
 
 function ProjectsSection({ projects }: ProjectsSectionProps) {
+  const featured = projects.filter((p) => p.featured);
+
   return (
     <section className="py-16 md:py-24">
       <Container>
         <div className="space-y-16 md:space-y-24">
-          {projects.map((project, index) => (
+          {featured.map((project, index) => (
             <ProjectCard key={index} project={project} />
           ))}
         </div>
