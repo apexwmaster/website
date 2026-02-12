@@ -23,7 +23,8 @@ export interface SanityTeamMember {
   _id: string
   name: string
   role: string
-  image: Image
+  category: string
+  image: Image | null
 }
 
 export interface SanityClientCategory {

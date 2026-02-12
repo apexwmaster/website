@@ -85,13 +85,14 @@ async function migrateTeamMembers() {
     const member = teamMembers[i];
     console.log(`  ${i + 1}/${teamMembers.length}: ${member.name}`);
 
-    const image = await uploadImage(member.image);
+    const image = member.image ? await uploadImage(member.image) : null;
 
     await client.create({
       _type: 'teamMember',
       name: member.name,
       role: member.role,
-      image,
+      category: member.category,
+      ...(image ? { image } : {}),
       order: i + 1,
     });
   }

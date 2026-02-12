@@ -13,8 +13,8 @@ function ProcessSection({ steps }: ProcessSectionProps) {
       <Container>
         {/* Section Header */}
         <div className="mb-6 md:mb-4">
-          <SectionHeader highlightedWord="Process" size="base">
-            Our Process
+          <SectionHeader highlightedWord="Survey Process" size="base">
+            Our Survey Process
           </SectionHeader>
           <p className="text-base md:text-lg w-full md:w-4/5">
             From initial surveys to final construction staking, our

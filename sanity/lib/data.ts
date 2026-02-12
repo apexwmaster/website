@@ -121,6 +121,7 @@ export async function getTeamMembers() {
       return members.map((m) => ({
         name: m.name,
         role: m.role,
+        category: (m.category || 'Survey Team') as import('@/components/about/team/team-data').TeamCategory,
         image: getImageUrl(m.image, 400),
       }))
     }

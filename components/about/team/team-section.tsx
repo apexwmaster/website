@@ -1,13 +1,20 @@
 import Container from '@/components/shared/container';
 import SectionHeader from '@/components/shared/section-header';
 import TeamMemberCard from './team-member-card';
-import { TeamMember } from './team-data';
+import { TeamMember, teamCategories } from './team-data';
 
 interface TeamSectionProps {
   members: TeamMember[];
 }
 
 function TeamSection({ members }: TeamSectionProps) {
+  const membersByCategory = teamCategories
+    .map((category) => ({
+      category,
+      members: members.filter((m) => m.category === category),
+    }))
+    .filter((group) => group.members.length > 0);
+
   return (
     <section className="mt-16 md:mt-24">
       <Container>
@@ -17,7 +24,7 @@ function TeamSection({ members }: TeamSectionProps) {
           className="mb-1">
           Meet Our Team
         </SectionHeader>
-        <p className="mb-4 md:text-lg leading-relaxed">
+        <p className="mb-8 md:text-lg leading-relaxed">
           The APEX Consulting & Surveying Team Brings Extensive
           Experience Serving Clients In The Fort Wayne Area. They Take
           Pride In Their Ability To Swiftly Resolve Challenges While
@@ -29,9 +36,18 @@ function TeamSection({ members }: TeamSectionProps) {
           Target.&quot;
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-          {members.map((member, index) => (
-            <TeamMemberCard key={index} member={member} />
+        <div className="space-y-12">
+          {membersByCategory.map(({ category, members: categoryMembers }) => (
+            <div key={category}>
+              <h3 className="text-xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-2">
+                {category}
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+                {categoryMembers.map((member, index) => (
+                  <TeamMemberCard key={index} member={member} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </Container>

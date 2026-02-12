@@ -46,6 +46,7 @@ export const teamMembersQuery = groq`
     _id,
     name,
     role,
+    category,
     image
   }
 `

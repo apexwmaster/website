@@ -20,18 +20,34 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      description: 'Team category this member belongs to',
+      options: {
+        list: [
+          { title: 'Owners', value: 'Owners' },
+          { title: 'Business Development', value: 'Business Development' },
+          { title: 'Survey Team', value: 'Survey Team' },
+          { title: 'Engineering Team', value: 'Engineering Team' },
+          { title: 'Inspection Team', value: 'Inspection Team' },
+          { title: 'Admin', value: 'Admin' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'image',
       title: 'Photo',
       type: 'image',
       options: { hotspot: true },
       description: 'Professional headshot photo. Use the hotspot to ensure face is centered when cropped.',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',
-      description: 'Controls the order team members appear on the page. Lower numbers appear first (e.g., 1 for President, 2 for Vice President).',
+      description: 'Controls the order team members appear within their category. Lower numbers appear first.',
     }),
   ],
   orderings: [
@@ -44,7 +60,7 @@ export default defineType({
   preview: {
     select: {
       title: 'name',
-      subtitle: 'role',
+      subtitle: 'category',
       media: 'image',
     },
   },

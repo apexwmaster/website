@@ -21,11 +21,11 @@ function FenceCtaBanner() {
               </p>
               <p className="mt-1 text-sm leading-relaxed text-gray-900 md:text-base">
                 <span className="font-semibold">
-                  Need fence work?
+                  Need a new fence?
                 </span>{' '}
-                APEX provides professional fence surveys. Due to
-                liability, we require a full survey before
-                starting—call us to get scheduled.
+                Know your property lines first. Apex provides reliable
+                land surveys to ensure your fence is built in the
+                right place – call us to get scheduled.
               </p>
             </div>
             <a

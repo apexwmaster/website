@@ -1,4 +1,5 @@
 import {
+  CivilEngineeringSection,
   ConstructionInspectionSection,
   IndotSection,
   RightOfWaySection,
@@ -18,6 +19,7 @@ function Services() {
       <IndotSection />
       <SurveyingSection />
       <RightOfWaySection />
+      <CivilEngineeringSection />
       <ConstructionInspectionSection />
       <StormwaterSection />
     </main>
